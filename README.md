@@ -15,14 +15,35 @@ have them. Identifier schemes are often tied to projects, and in the case of
 [TCGA barcodes](https://wiki.nci.nih.gov/display/TCGA/TCGA+barcode) even contain
 some metadata.
 
+This document is meant to provide strategies for Data Platforms, which have 
+internal data management needs, to integrate with Identifier Services, 
+Resolvers, and Prefix Services. Though Data Platforms may offer these 
+services internally, examples and use cases include interoperation with some
+popular and common services and identifier schemes.
+
+Data that is within a Data Platform will usually guarantee uniqueness 
+within that platform. However, the same identifier may represent different 
+data in another platform. Globally Unique Identifiers (GUIDs) provide a 
+way to address data across various platforms.
+
+This document's Use Cases are structured in such a way to protect Data 
+Platforms from changes that would alter their internal functionality: 
+Data Platforms should use the identifier scheme that best suits their 
+existing use case. 
+
+Satisfying Key Capability 2 (GUIDs) minimally requires Data Platforms 
+to maintain aliases to GUIDs when they are available to satisfy the needs 
+of findability or reproducibility. This requires, at least, a way to 
+modify metadata to include newly "minted" GUIDs and later find that data
+using the new identifier.
+
 ## Concepts
 
 ### Data
 
 For the purposes of this document it is important to separate the concepts of
 data from metadata. Data are the first order items one would like to share, 
-for example, a VCF might be data, while the date it was created would be 
-metadata.
+for example, a VCF might be data, while the file checksum would be metadata.
 
 ### Metadata
 
@@ -114,6 +135,50 @@ request is then redirected to an Identifier Resolver Service, which
 either redirects or returns metadata necessary to access the Data 
 Object.
 
+
+## Core Metadata Requirements
+
+The minimal metadata required to register for a GUID depends on the 
+underlying service and use case. However, to improve interoperability, 
+these metadata should be describable using [JSON schemas](http://json-schema.org/).
+
+For the purposes of registering a Data Object, which makes accessible 
+some data via URL, it is expected that a URL at minimum is provided. A 
+list of typed checksums should be provided when available to 
+verify downloads. For more information see [Data Object Service Schemas](https://github.com/ga4gh/data-object-service-schemas).
+
+Identifier services will require more or less information depending 
+on the use case covered. For example, issuing a DOI for a paper would require 
+a list of authors.
+
 ## Identifier Schemes
+
+Data Platforms are NOT required to use a normalized identifier scheme.
+A number of identifier schemes exist that can be used to ensure 
+uniqueness across services.
+
+* [minid](http://eid.difi.no/en/minid) - Minimum viable identifier.
+  * [White paper](http://bd2k.ini.usc.edu/assets/all-hands-meeting/minid_v0.1_Nov_2015.pdf)
+* [Archival Resource Key (ark)](https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Archival_Resource_Key.html) - Persistent URL based identifiers.
+* [Universally Unique Identifier (UUID)](https://en.wikipedia.org/wiki/UUID) - 128-bit number to uniquely address data.
+* [ORCID](https://orcid.org/) - Link researchers and research.
+
+## Identifier and Prefix Services
+
+Public services for registering identifiers exist. They differ in 
+their required metadata, provided services, and necessary metadata.
+These services should be used with the appropriate above services
+to register a GUID as necessary.
+
+* [Name to Things (n2t.net)](http://n2t.net/) - Register URLs to resolve identifiers.
+* [identifiers.org](http://identifiers.org/) - Register prefixes, interoperable with n2t.
+* [DataCite.org](https://www.datacite.org/) - Register DOIs.
+
+## HCA Data Storage System Example
+
+To provide practical instruction into how GUID resolution can 
+work in the in the Data Commons we offer this brief case study 
+of interoperating with the Human Cell Atlas Data Storage System, 
+which replicates data across cloud stores.
 
 
