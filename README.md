@@ -19,27 +19,20 @@ If you know of useful Identifier Schemes or Services please make a Pull Request!
 
 ## Data Findability <a name="findability"></a>
 
-We don't know all the things we would like to identify ahead of time, so
-the hope is that we can support the identifier schemes that folks have, when they
-have them. Identifier schemes are often tied to projects, and in the case of 
-[TCGA barcodes](https://wiki.nci.nih.gov/display/TCGA/TCGA+barcode) even contain
-some metadata.
-
 This document is meant to provide strategies for Data Platforms, which have 
 internal data management needs, to integrate with Identifier Services, 
-Resolvers, and Prefix Services. Though Data Platforms may offer these 
-services internally, examples and use cases include interoperation with some
-popular and common services and identifier schemes.
+Resolvers, and Prefix Services to provide a ramp to easy data interoperability. 
 
 Data that is within a Data Platform will usually guarantee uniqueness 
-within that platform. However, the same identifier may represent different 
+within that platform. Oftentimes, the identifier scheme was chosen to satisfy
+internal technical needs. However, the same identifier may represent different 
 data in another platform. Globally Unique Identifiers (GUIDs) provide a 
 way to address data across various platforms.
 
 This document's Use Cases are structured in such a way to protect Data 
 Platforms from changes that would alter their internal functionality: 
 Data Platforms should use the identifier scheme that best suits their 
-existing use case. 
+existing use case.
 
 Satisfying Key Capability 2 (GUIDs) minimally requires Data Platforms 
 to maintain aliases to GUIDs when they are available to satisfy the needs 
