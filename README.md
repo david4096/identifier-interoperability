@@ -7,7 +7,17 @@ in order to coordinate the interoperability of data access across its members.
 Examples and links from existing platforms will be added as they become
 available.
 
-## Data Findability
+If you know of useful Identifier Schemes or Services please make a Pull Request!
+
+1. [Data Findability](#findability)
+2. [Concepts](#concepts)
+3. [Use Cases](#usecases)
+4. [Core Metadata](#coremetadata)
+5. [Identifier Schemes](#schemes)
+6. [Identifier Services](#services)
+7. [Case Studies](#casestudies)
+
+## Data Findability <a name="findability"></a>
 
 We don't know all the things we would like to identify ahead of time, so
 the hope is that we can support the identifier schemes that folks have, when they
@@ -37,9 +47,9 @@ of findability or reproducibility. This requires, at least, a way to
 modify metadata to include newly "minted" GUIDs and later find that data
 using the new identifier.
 
-## Concepts
+## Concepts <a name="introduction"></a>
 
-### Data
+### Data 
 
 For the purposes of this document it is important to separate the concepts of
 data from metadata. Data are the first order items one would like to share, 
@@ -90,7 +100,7 @@ The template that is used to issue new identifiers for a given service,
 for example, UUID has the format `4be0071d-b36e-4414-a7ee-7b879f60be7a`, 
 whereas, another service may iterate numerically from 0.
 
-## Use Cases
+## Use Cases <a name="introduction"></a>
 
 ### 1 Providing a GUID for a Data Object via client
 
@@ -136,7 +146,7 @@ either redirects or returns metadata necessary to access the Data
 Object.
 
 
-## Core Metadata Requirements
+## Core Metadata Requirements <a name="introduction"></a>
 
 The minimal metadata required to register for a GUID depends on the 
 underlying service and use case. However, to improve interoperability, 
@@ -151,7 +161,7 @@ Identifier services will require more or less information depending
 on the use case covered. For example, issuing a DOI for a paper would require 
 a list of authors.
 
-## Identifier Schemes
+## Identifier Schemes <a name="schemes"></a>
 
 Data Platforms are NOT required to use a normalized identifier scheme.
 A number of identifier schemes exist that can be used to ensure 
@@ -163,7 +173,7 @@ uniqueness across services.
 * [Universally Unique Identifier (UUID)](https://en.wikipedia.org/wiki/UUID) - 128-bit number to uniquely address data.
 * [ORCID](https://orcid.org/) - Link researchers and research.
 
-## Identifier and Prefix Services
+## Identifier and Prefix Services <a name="services"></a>
 
 Public services for registering identifiers exist. They differ in 
 their required metadata, provided services, and necessary metadata.
@@ -174,11 +184,14 @@ to register a GUID as necessary.
 * [identifiers.org](http://identifiers.org/) - Register prefixes, interoperable with n2t.
 * [DataCite.org](https://www.datacite.org/) - Register DOIs.
 
-## HCA Data Storage System Example
+## Case Studies
+
+### HCA Data Storage System Case Study <a name="casestudy"></a>
 
 To provide practical instruction into how GUID resolution can 
 work in the in the Data Commons we offer this brief case study 
 of interoperating with the Human Cell Atlas Data Storage System, 
 which replicates data across cloud stores.
 
+TODO
 
