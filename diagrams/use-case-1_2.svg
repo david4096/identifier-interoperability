@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="28cm" height="10cm" viewBox="163 84 556 185" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="28cm" height="6cm" viewBox="163 84 556 115" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <path style="fill: #ffffff" d="M 339.533 161 L 448.2,161 C 431.9,168.2 426.467,171.8 426.467,179 C 426.467,186.2 431.9,189.8 448.2,197 L 339.533,197 C 323.233,189.8 317.8,186.2 317.8,179 C 317.8,171.8 323.233,168.2 339.533,161z"/>
     <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 339.533 161 L 448.2,161 C 431.9,168.2 426.467,171.8 426.467,179 C 426.467,186.2 431.9,189.8 448.2,197 L 339.533,197 C 323.233,189.8 317.8,186.2 317.8,179 C 317.8,171.8 323.233,168.2 339.533,161"/>
@@ -70,11 +70,6 @@
     <polygon style="fill: #000000" points="614.934,121.547 604.057,124.13 607.633,119.834 606.341,114.395 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="614.934,121.547 604.057,124.13 607.633,119.834 606.341,114.395 "/>
   </g>
-  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="275.2" y="233.9">
-    <tspan x="275.2" y="233.9">The result is passed to an Identifier Service client, which </tspan>
-    <tspan x="275.2" y="249.9">requests a GUID to be minted for the DOS URL. The original</tspan>
-    <tspan x="275.2" y="265.9">Data Object message is modified to include the GUID.</tspan>
-  </text>
   <g>
     <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="617.599" y1="151.359" x2="601.759" y2="156.815"/>
     <polygon style="fill: #000000" points="594.668,159.257 602.495,151.273 601.759,156.815 605.751,160.728 "/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
-<svg width="35cm" height="13cm" viewBox="87 21 691 254" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="35cm" height="10cm" viewBox="87 21 691 190" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g>
     <rect style="fill: #ffffff" x="305.2" y="26" width="79.9" height="79"/>
     <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="305.2" y="26" width="79.9" height="79"/>
@@ -82,15 +82,4 @@
     <polygon style="fill: #000000" points="228.081,172.408 238.222,167.7 235.578,172.626 237.932,177.696 "/>
     <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="228.081,172.408 238.222,167.7 235.578,172.626 237.932,177.696 "/>
   </g>
-  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="270" y="240">
-    <tspan x="270" y="240">The client then requests to update the Data Object to include </tspan>
-    <tspan x="270" y="256">the GUID from an Identifier Service. Another DOS client is able</tspan>
-    <tspan x="270" y="272">to then find the Data Object by GUID.</tspan>
-  </text>
-  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="625" y="106">
-    <tspan x="625" y="106">1.</tspan>
-  </text>
-  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="205" y="210">
-    <tspan x="205" y="210">2.</tspan>
-  </text>
 </svg>

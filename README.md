@@ -97,13 +97,34 @@ whereas, another service may iterate numerically from 0.
 
 ### 1 Providing a GUID for a Data Object via client
 
+#### 1.1 Get a Data Object by Data Object Identifier
+<p align="center">
+<img src="diagrams/use-case-1_1.svg" width="500"/>
+</p>
+
 A Data Provider offers some data that can be uniquely identified using an
-internal identifer scheme. An authorized client accesses this metadata, 
-and makes a local copy. The client then modifies the local metadata format 
-to accord to an Identifier Service's schema. The client then requests 
-a "newly minted" identifier for the Data Object from the Identifier Service.
-The Identifier Service responds with the GUID and the client makes 
-and authorized request to modify the metadata to include the GUID.
+internal identifer scheme. Using a DOS client the Data Object can be retrieved
+using a Data Object Identifier.
+
+#### 1.2 Register the Data Object URL at an Identifier Service
+<p align="center">
+<img src="diagrams/use-case-1_2.svg" width="500"/>
+</p>
+
+The client then modifies the local metadata format 
+to accord to an Identifier Service's request schema. The client then requests 
+a "newly minted" identifier for the Data Object from the Identifier Service. 
+And modifies the metadata of their local copy of the Data Object to 
+include the GUID as an alias.
+
+#### 1.3 Update the Data Object Metadata
+<p align="center">
+<img src="diagrams/use-case-1_3.svg" width="500"/>
+</p>
+
+The client then requests to update the Data Object by sending an Update request
+to the DOS. Then, another client can find the data by GUID by listing
+Data Objects that match the requested GUID.
 
 ### 2 Providing a GUID for a Data Object automatically
 
