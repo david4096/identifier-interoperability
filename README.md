@@ -195,7 +195,7 @@ can be addressed by GUID.
 #### 3.2 Using a client to find data on multiple platforms
 
 <p align="center">
-<img src="diagrams/use-case-3_2.svg" width="400"/>
+<img src="diagrams/use-case-3_2.svg" width="500"/>
 </p>
 
 Assuming that [1](#1) has been fulfilled across platforms, a DOS client 
@@ -214,7 +214,7 @@ consensus around identity.
 ### 4 Resolving Data Object Identifiers across platforms
 
 <p align="center">
-<img src="diagrams/use-case-4_1.svg" width="450"/>
+<img src="diagrams/use-case-4_1.svg" width="400"/>
 </p>
 
 A client with a Data Object Identifier should be able find the Data 
@@ -224,15 +224,30 @@ they make their request to an identifier resolver, which will either
 return the proper metadata from the Data Provider, or redirect 
 the client to it.
 
+First, the client makes a request to the resolver using a simple
+HTTP get request. The resolver curates a list of services to request 
+against. It issues the request against each of the services. In this 
+case, the data is hosted in a single platform, and so just that
+metadata is returned to the client.
+
 <a name="5"> </a>
 ### 5 Resolving Data Object Identifiers across platforms using a Prefix Service
 
+<p align="center">
+<img src="diagrams/use-case-5_1.svg" width="450"/>
+</p>
+
 Using an identifier and a prefix, a client should be able to request 
 more metadata for a given Data Object. The client first makes a request 
-against a prefix service with the proper prefix and identifier, the 
-request is then redirected to an Identifier Resolver Service, which 
-either redirects or returns metadata necessary to access the Data 
-Object.
+against a Prefix Service (or Namespace Service)  with the proper prefix
+and identifier.
+
+The Prefix Service maintains a list of prefixes to Identifier Services
+and redirects the incoming request to the correct service according to
+the request. The client is then returned metadata necessary to access 
+the Data Object.
+
+See [identifiers.org](https://identifiers.org).
 
 <a name="coremetadata"></a>
 ## Core Metadata Requirements 
