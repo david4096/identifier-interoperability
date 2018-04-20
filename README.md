@@ -178,10 +178,19 @@ GUID.
 <a name="3"> </a>
 ### 3 Using a client to find data using a GUID
 
+<p align="center">
+<img src="diagrams/use-case-3_1.svg" width="500"/>
+</p>
+
 A client with a GUID should be able to make a request to a Data Provider 
 for data that matches that GUID. If the metadata for the item includes 
 a GUID, the metadata for that item will be returned, which includes 
 details necessary to access or download the Data Object.
+
+It is important to note that since GUIDs are unique as a matter of service 
+they cannot be addressed uniquely across platforms. Instead a list of
+Data Objects matching the alias is returned to ease the process of forming 
+consensus around identity.
 
 <a name="4"> </a>
 ### 4 Resolving Data Object Identifiers across platforms
