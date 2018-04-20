@@ -178,13 +178,44 @@ GUID.
 <a name="3"> </a>
 ### 3 Using a client to find data using a GUID
 
+#### 3.1 Using a client to find data hosted on a single platform
+
+<p align="center">
+<img src="diagrams/use-case-3_1.svg" width="400"/>
+</p>
+
 A client with a GUID should be able to make a request to a Data Provider 
 for data that matches that GUID. If the metadata for the item includes 
 a GUID, the metadata for that item will be returned, which includes 
 details necessary to access or download the Data Object.
 
+This presumes that Use Case [1](#1) has been fulfilled, such that content 
+can be addressed by GUID.
+
+#### 3.2 Using a client to find data on multiple platforms
+
+<p align="center">
+<img src="diagrams/use-case-3_2.svg" width="500"/>
+</p>
+
+Assuming that [1](#1) has been fulfilled across platforms, a DOS client 
+with a GUID should be able to resolve that data across platforms. The 
+client makes a request to each platform's respectively, and the platform 
+returns a list of matching Data Objects. These Data Objects may differ 
+in their url, or other metadata, but should through proper identifier reuse 
+point to the same data.
+
+It is important to note that since GUIDs are unique as a matter of service 
+they cannot be addressed uniquely across platforms. Instead a list of
+Data Objects matching the alias is returned to ease the process of forming 
+consensus around identity.
+
 <a name="4"> </a>
 ### 4 Resolving Data Object Identifiers across platforms
+
+<p align="center">
+<img src="diagrams/use-case-4_1.svg" width="400"/>
+</p>
 
 A client with a Data Object Identifier should be able find the Data 
 for that identifier without requesting from each of the Commons 
@@ -193,15 +224,30 @@ they make their request to an identifier resolver, which will either
 return the proper metadata from the Data Provider, or redirect 
 the client to it.
 
+First, the client makes a request to the resolver using a simple
+HTTP get request. The resolver curates a list of services to request 
+against. It issues the request against each of the services. In this 
+case, the data is hosted in a single platform, and so just that
+metadata is returned to the client.
+
 <a name="5"> </a>
 ### 5 Resolving Data Object Identifiers across platforms using a Prefix Service
 
+<p align="center">
+<img src="diagrams/use-case-5_1.svg" width="450"/>
+</p>
+
 Using an identifier and a prefix, a client should be able to request 
 more metadata for a given Data Object. The client first makes a request 
-against a prefix service with the proper prefix and identifier, the 
-request is then redirected to an Identifier Resolver Service, which 
-either redirects or returns metadata necessary to access the Data 
-Object.
+against a Prefix Service (or Namespace Service)  with the proper prefix
+and identifier.
+
+The Prefix Service maintains a list of prefixes to Identifier Services
+and redirects the incoming request to the correct service according to
+the request. The client is then returned metadata necessary to access 
+the Data Object.
+
+See [identifiers.org](https://identifiers.org).
 
 <a name="coremetadata"></a>
 ## Core Metadata Requirements 
