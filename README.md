@@ -161,10 +161,14 @@ identifier.
 By satisfying this Use Case, Data Providers can provide strong guarantees 
 that all their data will be resolvable across platforms.
 
+##### A Note Regarding Automated GUID Registration
+
 It is expected that in practice some mixture of automated and curated aliasing 
 will be used. Take, for example, the case that a Data Object has had a GUID
-registered for it by another Data Provider. Automatically generating another 
-GUID for this same Object would pollute the identifier space. It is up to Data Providers to 
+registered for it by another Data Provider. 
+
+Automatically generating another  GUID for this same Object would pollute 
+the identifier space. It is up to Data Providers to 
 enact data management policies that will reduce unnecessary usage of GUIDs.
 Proper usage of the Data Object Service should allow platforms to reason 
 about the presence of some data in another platform before minting another 
