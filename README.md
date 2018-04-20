@@ -100,6 +100,7 @@ whereas, another service may iterate numerically from 0.
 <a name="usecases"></a>
 ## Use Cases 
 
+<a name="1.1"> </a>
 ### 1 Providing a GUID for a Data Object via client
 
 <a name="1.1"> </a>
@@ -154,7 +155,7 @@ The remaining interaction proceeds the same as [1.2](#1.2) with the assumption
 that the Identifier Service has a simple HTTP API. This allows clients 
 to automate the interaction of registering metadata.
 
-Similar to Use Case 1, data becomes resolvable by GUID once its Data Object 
+Similar to Use Case [1](#1), data becomes resolvable by GUID once its Data Object 
 metadata has been changed to reflect the newly minted external 
 identifier.
 
@@ -182,7 +183,7 @@ for data that matches that GUID. If the metadata for the item includes
 a GUID, the metadata for that item will be returned, which includes 
 details necessary to access or download the Data Object.
 
-<a name="4""> </a>
+<a name="4"> </a>
 ### 4 Resolving Data Object Identifiers across platforms
 
 A client with a Data Object Identifier should be able find the Data 
