@@ -1,9 +1,11 @@
-# Identifier Interoperability
+# <img src="diagrams/nayrhcrel-mad-hatter-with-label-on-hat.svg" width="100" align="left" /> Identifier Interoperability
+
+<a href="https://zenodo.org/badge/latestdoi/128985969"><img src="https://zenodo.org/badge/128985969.svg" alt="DOI"></a>
+
 
 This document offers ways for platforms that are part of the NIH Data Commons
 Pilot to demonstrate Key Capability 2 (KC2), which coordinates the findability of
-data across Commons Platforms. This document was prepared for Team Calcium 
-in order to coordinate the interoperability of data access across its members.
+data across Commons Platforms. This document was prepared for Team Calcium.
 Examples and links from existing platforms will be added as they become
 available.
 
@@ -17,7 +19,8 @@ If you know of useful Identifier Schemes or Services please make a Pull Request!
 6. [Identifier Services](#services)
 7. [Case Studies](#casestudies)
 
-## Data Findability <a name="findability"></a>
+<a name="findability"></a>
+## Data Findability 
 
 This document is meant to provide strategies for Data Platforms, which have 
 internal data management needs, to integrate with Identifier Services, 
@@ -40,7 +43,8 @@ of findability or reproducibility. This requires, at least, a way to
 modify metadata to include newly "minted" GUIDs and later find that data
 using the new identifier.
 
-## Concepts <a name="introduction"></a>
+<a name="concepts"></a>
+## Concepts 
 
 ### Data 
 
@@ -93,26 +97,85 @@ The template that is used to issue new identifiers for a given service,
 for example, UUID has the format `4be0071d-b36e-4414-a7ee-7b879f60be7a`, 
 whereas, another service may iterate numerically from 0.
 
-## Use Cases <a name="introduction"></a>
+<a name="usecases"></a>
+## Use Cases 
 
+<a name="1.1"> </a>
 ### 1 Providing a GUID for a Data Object via client
 
+<a name="1.1"> </a>
+#### 1.1 Get a Data Object by Data Object Identifier 
+<p align="center">
+<img src="diagrams/use-case-1_1.svg" width="500"/>
+</p>
+
 A Data Provider offers some data that can be uniquely identified using an
-internal identifer scheme. An authorized client accesses this metadata, 
-and makes a local copy. The client then modifies the local metadata format 
-to accord to an Identifier Service's schema. The client then requests 
-a "newly minted" identifier for the Data Object from the Identifier Service.
-The Identifier Service responds with the GUID and the client makes 
-and authorized request to modify the metadata to include the GUID.
+internal identifer scheme. Using a DOS client the Data Object can be retrieved
+using a Data Object Identifier.
 
-### 2 Providing a GUID for a Data Object automatically
+<a name="1.2"> </a>
+#### 1.2 Register the Data Object URL at an Identifier Service
+<p align="center">
+<img src="diagrams/use-case-1_2.svg" width="500"/>
+</p>
 
-By automating the interaction with Identifier Services, Data Providers 
-can automatically make their data resolvable using GUIDs (like DOI, 
-ark, etc.). To satisfy this use case, when new data to be given a GUID
-are indexed by a data provider, they should request a new identifier
-and update the metadata similar to A.
+The client then modifies the local metadata format 
+to accord to an Identifier Service's request schema. The client then requests 
+a "newly minted" identifier for the Data Object from the Identifier Service. 
+And modifies the metadata of their local copy of the Data Object to 
+include the GUID as an alias.
 
+<a name="1.3"> </a>
+#### 1.3 Update the Data Object Metadata
+<p align="center">
+<img src="diagrams/use-case-1_3.svg" width="500"/>
+</p>
+
+The client then requests to update the Data Object by sending an Update request
+to the DOS. Then, another client can find the data by GUID by listing
+Data Objects that match the requested GUID.
+
+<a name="2"> </a>
+### 2 Providing a GUID for a Data Object Automatically
+
+<a name="2.1"> </a>
+#### 2.1 Using an Upload Hook to Get A Data Object
+
+<p align="center">
+<img src="diagrams/use-case-2_1.svg" width="500"/>
+</p>
+
+By using an Upload Hook that subscribes to changes to the Object Store, 
+or which periodically polls for changes against a Data Object Service, 
+software can automate the retrieval a Data Object. This is similar to how a 
+client performed the retrieval in [1.1](#1.1), without requiring human 
+intervention.
+
+The remaining interaction proceeds the same as [1.2](#1.2) with the assumption
+that the Identifier Service has a simple HTTP API. This allows clients 
+to automate the interaction of registering metadata.
+
+Similar to Use Case [1](#1), data becomes resolvable by GUID once its Data Object 
+metadata has been changed to reflect the newly minted external 
+identifier.
+
+By satisfying this Use Case, Data Providers can provide strong guarantees 
+that all their data will be resolvable across platforms.
+
+##### A Note Regarding Automated GUID Registration
+
+It is expected that in practice some mixture of automated and curated aliasing 
+will be used. Take, for example, the case that a Data Object has had a GUID
+registered for it by another Data Provider. 
+
+Automatically generating another  GUID for this same Object would pollute 
+the identifier space. It is up to Data Providers to 
+enact data management policies that will reduce unnecessary usage of GUIDs.
+Proper usage of the Data Object Service should allow platforms to reason 
+about the presence of some data in another platform before minting another 
+GUID.
+
+<a name="3"> </a>
 ### 3 Using a client to find data using a GUID
 
 A client with a GUID should be able to make a request to a Data Provider 
@@ -120,6 +183,7 @@ for data that matches that GUID. If the metadata for the item includes
 a GUID, the metadata for that item will be returned, which includes 
 details necessary to access or download the Data Object.
 
+<a name="4"> </a>
 ### 4 Resolving Data Object Identifiers across platforms
 
 A client with a Data Object Identifier should be able find the Data 
@@ -129,6 +193,7 @@ they make their request to an identifier resolver, which will either
 return the proper metadata from the Data Provider, or redirect 
 the client to it.
 
+<a name="5"> </a>
 ### 5 Resolving Data Object Identifiers across platforms using a Prefix Service
 
 Using an identifier and a prefix, a client should be able to request 
@@ -138,8 +203,8 @@ request is then redirected to an Identifier Resolver Service, which
 either redirects or returns metadata necessary to access the Data 
 Object.
 
-
-## Core Metadata Requirements <a name="introduction"></a>
+<a name="coremetadata"></a>
+## Core Metadata Requirements 
 
 The minimal metadata required to register for a GUID depends on the 
 underlying service and use case. However, to improve interoperability, 
@@ -154,7 +219,8 @@ Identifier services will require more or less information depending
 on the use case covered. For example, issuing a DOI for a paper would require 
 a list of authors.
 
-## Identifier Schemes <a name="schemes"></a>
+<a name="schemes"></a>
+## Identifier Schemes 
 
 Data Platforms are NOT required to use a normalized identifier scheme.
 A number of identifier schemes exist that can be used to ensure 
@@ -166,7 +232,8 @@ uniqueness across services.
 * [Universally Unique Identifier (UUID)](https://en.wikipedia.org/wiki/UUID) - 128-bit number to uniquely address data.
 * [ORCID](https://orcid.org/) - Link researchers and research.
 
-## Identifier and Prefix Services <a name="services"></a>
+<a name="services"></a>
+## Identifier and Prefix Services 
 
 Public services for registering identifiers exist. They differ in 
 their required metadata, provided services, and necessary metadata.
@@ -177,9 +244,10 @@ to register a GUID as necessary.
 * [identifiers.org](http://identifiers.org/) - Register prefixes, interoperable with n2t.
 * [DataCite.org](https://www.datacite.org/) - Register DOIs.
 
+<a name="casestudy"></a>
 ## Case Studies
 
-### HCA Data Storage System Case Study <a name="casestudy"></a>
+### HCA Data Storage System Case Study 
 
 To provide practical instruction into how GUID resolution can 
 work in the in the Data Commons we offer this brief case study 
