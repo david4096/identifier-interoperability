@@ -290,15 +290,41 @@ to register a GUID as necessary.
 * [identifiers.org](http://identifiers.org/) - Register prefixes, interoperable with n2t.
 * [DataCite.org](https://www.datacite.org/) - Register DOIs.
 
-<a name="casestudy"></a>
+<a name="casestudies"></a>
 ## Case Studies
 
 ### HCA Data Storage System Case Study 
 
 To provide practical instruction into how GUID resolution can 
 work in the in the Data Commons we offer this brief case study 
-of interoperating with the Human Cell Atlas Data Storage System, 
+of interoperating with the [Human Cell Atlas Data Storage System](https://github.com/HumanCellAtlas/data-store), 
 which replicates data across cloud stores.
 
-TODO
+<p align="center">
+<img src="diagrams/dss-example-1.svg" width="450"/>
+</p>
+
+On the left of the image, the Data Store System (DSS) replicates 
+data in Object Stores and indexes in three commercial clouds. These
+data are made available via an HTTP API, labeled DSS API.
+
+The [dss-azul-indexer](https://github.com/DataBiosphere/dss-azul-indexer) 
+takes advantage of a DSS feature to subscribe to changes in the data store.
+New bundles are sent to the dss-azul-indexer, which attempts to normalize 
+documents and add the to the `azul-index`. This index is then accessed by 
+the dos-azul-lambda.
+
+To satisfy [Use Case 1](#1), a GUID is minted for a Data Object. An authorized 
+DOS client can then send an `UpdateDataObjectRequest` to include the GUID 
+as an alias. The dos-azul-lambda updates the azul-index accordingly.
+
+<p align="center">
+<img src="diagrams/dss-example-2.svg" width="450"/>
+</p>
+
+By enabling easy modification of metadata and presenting that metadata using
+the Data Object Service, data in the DSS can be addressed by GUID.
+
+A client can then make a `ListDataObjectsRequest` with a GUID and expect 
+a list of Data Objects matching the request returned.
 
