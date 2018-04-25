@@ -312,7 +312,7 @@ The [dss-azul-indexer](https://github.com/DataBiosphere/dss-azul-indexer)
 takes advantage of a DSS feature to subscribe to changes in the data store.
 New bundles are sent to the dss-azul-indexer, which attempts to normalize 
 documents and add the to the `azul-index`. This index is then accessed by 
-the dos-azul-lambda.
+the [dos-azul-lambda](https://github.com/DataBiosphere/dos-azul-lambda).
 
 To satisfy [Use Case 1](#1), a GUID is minted for a Data Object. An authorized 
 DOS client can then send an `UpdateDataObjectRequest` to include the GUID 
