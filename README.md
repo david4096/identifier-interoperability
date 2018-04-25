@@ -1,7 +1,7 @@
 # <img src="diagrams/tweedles.svg" width="100" align="left" /> Identifier Interoperability
 
 <a href="https://zenodo.org/badge/latestdoi/128985969"><img src="https://zenodo.org/badge/128985969.svg" alt="DOI"></a>
-
+<a href="http://minid.bd2k.org/minid/landingpage/ark:/57799/b9040f"> `ark:/57799/b9040f`</a>
 
 This document offers ways for platforms that are part of the NIH Data Commons
 Pilot to demonstrate Key Capability 2 (KC2), which coordinates the findability of
