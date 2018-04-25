@@ -1,0 +1,126 @@
+<h1 id="identifier-interoperability"><img src="diagrams/tweedles.svg" width="100" align="left" /> Identifier Interoperability</h1>
+<p><a href="https://zenodo.org/badge/latestdoi/128985969"><img src="https://zenodo.org/badge/128985969.svg" alt="DOI"></a></p>
+<p>This document offers ways for platforms that are part of the NIH Data Commons Pilot to demonstrate Key Capability 2 (KC2), which coordinates the findability of data across Commons Platforms. This document was prepared for Team Calcium. Examples and links from existing platforms will be added as they become available.</p>
+<p>If you know of useful Identifier Schemes or Services please make a Pull Request!</p>
+<ol style="list-style-type: decimal">
+<li><a href="#findability">Data Findability</a></li>
+<li><a href="#concepts">Concepts</a></li>
+<li><a href="#usecases">Use Cases</a></li>
+<li><a href="#coremetadata">Core Metadata</a></li>
+<li><a href="#schemes">Identifier Schemes</a></li>
+<li><a href="#services">Identifier Services</a></li>
+<li><a href="#casestudies">Case Studies</a></li>
+</ol>
+<p><a name="findability"></a> ## Data Findability</p>
+<p>This document is meant to provide strategies for Data Platforms, which have internal data management needs, to integrate with Identifier Services, Resolvers, and Prefix Services to provide a ramp to easy data interoperability.</p>
+<p>Data that is within a Data Platform will usually guarantee uniqueness within that platform. Oftentimes, the identifier scheme was chosen to satisfy internal technical needs. However, the same identifier may represent different data in another platform. Globally Unique Identifiers (GUIDs) provide a way to address data across various platforms.</p>
+<p>This document's Use Cases are structured in such a way to protect Data Platforms from changes that would alter their internal functionality: Data Platforms should use the identifier scheme that best suits their existing use case.</p>
+<p>Satisfying Key Capability 2 (GUIDs) minimally requires Data Platforms to maintain aliases to GUIDs when they are available to satisfy the needs of findability or reproducibility. This requires, at least, a way to modify metadata to include newly &quot;minted&quot; GUIDs and later find that data using the new identifier.</p>
+<p><a name="concepts"></a> ## Concepts</p>
+<h3 id="data">Data</h3>
+<p>For the purposes of this document it is important to separate the concepts of data from metadata. Data are the first order items one would like to share, for example, a VCF might be data, while the file checksum would be metadata.</p>
+<h3 id="metadata">Metadata</h3>
+<p>Metadata describe data and are usually string keys paired with string, numeric, array, or object-like values. Metadata should be representable in JSON schemas.</p>
+<h3 id="json">JSON</h3>
+<p>JavaScript Object Notation is a scheme for transmitting data between web services. Both metadata and interface methods for services in this document communicate using JSON.</p>
+<h3 id="data-object">Data Object</h3>
+<p>A file, resource, or API that has been uniquely identified for a given service, and which provides a minimum of fields from the Data Object Service schema.</p>
+<h3 id="data-provider">Data Provider</h3>
+<p>Data providers coordinate their platforms using internal tools, which they have they often have the ability to rapidly iterate on. Data providers may provision data using a variety of storage and metadata indexing services.</p>
+<h3 id="identifier-service">Identifier Service</h3>
+<p>Registries allow identifiers for data to be managed and shared separately from the data. They require core metadata in order to register an item.</p>
+<h3 id="prefix-service">Prefix Service</h3>
+<p>In order to provide stable identifier namespaces, prefix services like <a href="https://identifiers.org">identifers.org</a> allow one to redirect prefixes, like <code>dos</code>, to stable URLs. They only store metadata about the service.</p>
+<h3 id="identifier-resolver-service">Identifier Resolver Service</h3>
+<p>Using a given identifier, these services allow clients to find the proper service to resolve more metadata about the Data Object.</p>
+<h3 id="identifier-scheme">Identifier Scheme</h3>
+<p>The template that is used to issue new identifiers for a given service, for example, UUID has the format <code>4be0071d-b36e-4414-a7ee-7b879f60be7a</code>, whereas, another service may iterate numerically from 0.</p>
+<p><a name="usecases"></a> ## Use Cases</p>
+<p><a name="1.1"> </a> ### 1 Providing a GUID for a Data Object via client</p>
+<a name="1.1"> </a> #### 1.1 Get a Data Object by Data Object Identifier
+<p align="center">
+<img src="diagrams/use-case-1_1.svg" width="500"/>
+</p>
+<p>A Data Provider offers some data that can be uniquely identified using an internal identifer scheme. Using a DOS client the Data Object can be retrieved using a Data Object Identifier.</p>
+<a name="1.2"> </a> #### 1.2 Register the Data Object URL at an Identifier Service
+<p align="center">
+<img src="diagrams/use-case-1_2.svg" width="500"/>
+</p>
+<p>The client then modifies the local metadata format to accord to an Identifier Service's request schema. The client then requests a &quot;newly minted&quot; identifier for the Data Object from the Identifier Service. And modifies the metadata of their local copy of the Data Object to include the GUID as an alias.</p>
+<a name="1.3"> </a> #### 1.3 Update the Data Object Metadata
+<p align="center">
+<img src="diagrams/use-case-1_3.svg" width="500"/>
+</p>
+<p>The client then requests to update the Data Object by sending an Update request to the DOS. Then, another client can find the data by GUID by listing Data Objects that match the requested GUID.</p>
+<p><a name="2"> </a> ### 2 Providing a GUID for a Data Object Automatically</p>
+<p><a name="2.1"> </a> #### 2.1 Using an Upload Hook to Get A Data Object</p>
+<p align="center">
+<img src="diagrams/use-case-2_1.svg" width="500"/>
+</p>
+<p>By using an Upload Hook that subscribes to changes to the Object Store, or which periodically polls for changes against a Data Object Service, software can automate the retrieval a Data Object. This is similar to how a client performed the retrieval in <a href="#1.1">1.1</a>, without requiring human intervention.</p>
+<p>The remaining interaction proceeds the same as <a href="#1.2">1.2</a> with the assumption that the Identifier Service has a simple HTTP API. This allows clients to automate the interaction of registering metadata.</p>
+<p>Similar to Use Case <a href="#1">1</a>, data becomes resolvable by GUID once its Data Object metadata has been changed to reflect the newly minted external identifier.</p>
+<p>By satisfying this Use Case, Data Providers can provide strong guarantees that all their data will be resolvable across platforms.</p>
+<h5 id="a-note-regarding-automated-guid-registration">A Note Regarding Automated GUID Registration</h5>
+<p>It is expected that in practice some mixture of automated and curated aliasing will be used. Take, for example, the case that a Data Object has had a GUID registered for it by another Data Provider.</p>
+<p>Automatically generating another GUID for this same Object would pollute the identifier space. It is up to Data Providers to enact data management policies that will reduce unnecessary usage of GUIDs. Proper usage of the Data Object Service should allow platforms to reason about the presence of some data in another platform before minting another GUID.</p>
+<p><a name="3"> </a> ### 3 Using a client to find data using a GUID</p>
+<h4 id="using-a-client-to-find-data-hosted-on-a-single-platform">3.1 Using a client to find data hosted on a single platform</h4>
+<p align="center">
+<img src="diagrams/use-case-3_1.svg" width="400"/>
+</p>
+<p>A client with a GUID should be able to make a request to a Data Provider for data that matches that GUID. If the metadata for the item includes a GUID, the metadata for that item will be returned, which includes details necessary to access or download the Data Object.</p>
+<p>This presumes that Use Case <a href="#1">1</a> has been fulfilled, such that content can be addressed by GUID.</p>
+<h4 id="using-a-client-to-find-data-on-multiple-platforms">3.2 Using a client to find data on multiple platforms</h4>
+<p align="center">
+<img src="diagrams/use-case-3_2.svg" width="500"/>
+</p>
+<p>Assuming that <a href="#1">1</a> has been fulfilled across platforms, a DOS client with a GUID should be able to resolve that data across platforms. The client makes a request to each platform's respectively, and the platform returns a list of matching Data Objects. These Data Objects may differ in their url, or other metadata, but should through proper identifier reuse point to the same data.</p>
+<p>It is important to note that since GUIDs are unique as a matter of service they cannot be addressed uniquely across platforms. Instead a list of Data Objects matching the alias is returned to ease the process of forming consensus around identity.</p>
+<p><a name="4"> </a> ### 4 Resolving Data Object Identifiers across platforms</p>
+<p align="center">
+<img src="diagrams/use-case-4_1.svg" width="400"/>
+</p>
+<p>A client with a Data Object Identifier should be able find the Data for that identifier without requesting from each of the Commons Platforms. Instead of making the request against each platform, they make their request to an identifier resolver, which will either return the proper metadata from the Data Provider, or redirect the client to it.</p>
+<p>First, the client makes a request to the resolver using a simple HTTP get request. The resolver curates a list of services to request against. It issues the request against each of the services. In this case, the data is hosted in a single platform, and so just that metadata is returned to the client.</p>
+<p><a name="5"> </a> ### 5 Resolving Data Object Identifiers across platforms using a Prefix Service</p>
+<p align="center">
+<img src="diagrams/use-case-5_1.svg" width="450"/>
+</p>
+<p>Using an identifier and a prefix, a client should be able to request more metadata for a given Data Object. The client first makes a request against a Prefix Service (or Namespace Service) with the proper prefix and identifier.</p>
+<p>The Prefix Service maintains a list of prefixes to Identifier Services and redirects the incoming request to the correct service according to the request. The client is then returned metadata necessary to access the Data Object.</p>
+<p>See <a href="https://identifiers.org">identifiers.org</a>.</p>
+<p><a name="coremetadata"></a> ## Core Metadata Requirements</p>
+<p>The minimal metadata required to register for a GUID depends on the underlying service and use case. However, to improve interoperability, these metadata should be describable using <a href="http://json-schema.org/">JSON schemas</a>.</p>
+<p>For the purposes of registering a Data Object, which makes accessible some data via URL, it is expected that a URL at minimum is provided. A list of typed checksums should be provided when available to verify downloads. For more information see <a href="https://github.com/ga4gh/data-object-service-schemas">Data Object Service Schemas</a>.</p>
+<p>Identifier services will require more or less information depending on the use case covered. For example, issuing a DOI for a paper would require a list of authors.</p>
+<p><a name="schemes"></a> ## Identifier Schemes</p>
+<p>Data Platforms are NOT required to use a normalized identifier scheme. A number of identifier schemes exist that can be used to ensure uniqueness across services.</p>
+<ul>
+<li><a href="http://eid.difi.no/en/minid">minid</a> - Minimum viable identifier.</li>
+<li><a href="http://bd2k.ini.usc.edu/assets/all-hands-meeting/minid_v0.1_Nov_2015.pdf">White paper</a></li>
+<li><a href="https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Archival_Resource_Key.html">Archival Resource Key (ark)</a> - Persistent URL based identifiers.</li>
+<li><a href="https://en.wikipedia.org/wiki/UUID">Universally Unique Identifier (UUID)</a> - 128-bit number to uniquely address data.</li>
+<li><a href="https://orcid.org/">ORCID</a> - Link researchers and research.</li>
+</ul>
+<p><a name="services"></a> ## Identifier and Prefix Services</p>
+<p>Public services for registering identifiers exist. They differ in their required metadata, provided services, and necessary metadata. These services should be used with the appropriate above services to register a GUID as necessary.</p>
+<ul>
+<li><a href="http://n2t.net/">Name to Things (n2t.net)</a> - Register URLs to resolve identifiers.</li>
+<li><a href="http://identifiers.org/">identifiers.org</a> - Register prefixes, interoperable with n2t.</li>
+<li><a href="https://www.datacite.org/">DataCite.org</a> - Register DOIs.</li>
+</ul>
+<p><a name="casestudies"></a> ## Case Studies</p>
+<h3 id="hca-data-storage-system-case-study">HCA Data Storage System Case Study</h3>
+<p>To provide practical instruction into how GUID resolution can work in the in the Data Commons we offer this brief case study of interoperating with the <a href="https://github.com/HumanCellAtlas/data-store">Human Cell Atlas Data Storage System</a>, which replicates data across cloud stores.</p>
+<p align="center">
+<img src="diagrams/dss-example-1.svg" width="450"/>
+</p>
+<p>On the left of the image, the Data Store System (DSS) replicates data in Object Stores and indexes in three commercial clouds. These data are made available via an HTTP API, labeled DSS API.</p>
+<p>The <a href="https://github.com/DataBiosphere/dss-azul-indexer">dss-azul-indexer</a> takes advantage of a DSS feature to subscribe to changes in the data store. New bundles are sent to the dss-azul-indexer, which attempts to normalize documents and add the to the <code>azul-index</code>. This index is then accessed by the <a href="https://github.com/DataBiosphere/dos-azul-lambda">dos-azul-lambda</a>.</p>
+<p>To satisfy <a href="#1">Use Case 1</a>, a GUID is minted for a Data Object. An authorized DOS client can then send an <code>UpdateDataObjectRequest</code> to include the GUID as an alias. The dos-azul-lambda updates the azul-index accordingly.</p>
+<p align="center">
+<img src="diagrams/dss-example-2.svg" width="450"/>
+</p>
+<p>By enabling easy modification of metadata and presenting that metadata using the Data Object Service, data in the DSS can be addressed by GUID.</p>
+<p>A client can then make a <code>ListDataObjectsRequest</code> with a GUID and expect a list of Data Objects matching the request returned.</p>
