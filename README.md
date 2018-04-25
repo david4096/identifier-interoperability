@@ -1,4 +1,4 @@
-# <img src="diagrams/nayrhcrel-mad-hatter-with-label-on-hat.svg" width="100" align="left" /> Identifier Interoperability
+# <img src="diagrams/tweedles.svg" width="100" align="left" /> Identifier Interoperability
 
 <a href="https://zenodo.org/badge/latestdoi/128985969"><img src="https://zenodo.org/badge/128985969.svg" alt="DOI"></a>
 
