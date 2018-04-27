@@ -298,7 +298,8 @@ to register a GUID as necessary.
 To provide practical instruction into how GUID resolution can 
 work in the in the Data Commons we offer this brief case study 
 of interoperating with the [Human Cell Atlas Data Storage System](https://github.com/HumanCellAtlas/data-store), 
-which replicates data across cloud stores.
+which replicates data across cloud stores. See the [Case Study 
+Notebook](notebooks/dss-case-study.ipynb) for more details.
 
 <p align="center">
 <img src="diagrams/dss-example-1.svg" width="450"/>
